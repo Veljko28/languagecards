@@ -2,9 +2,25 @@
     ViewData["Title"] = "Home";
 }
 
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
+<link href="~/css/home.css" rel="stylesheet" />
+
+
+<div 
+     style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px"
+     >
+    <div class="modal-container" id="modal_container">
+        <div class="modal">
+                <h1 class="title">Login</h1>
+                <input type="text" class="lgninp" name="userName" value="" placeholder="Username" />
+                <input type="password" class="lgninp" name="Password" value="" placeholder="Password" />
+                <input value="SUBMIT" class="loginbtn" type="button"/>
+        </div>
+    </div>
     <img src="~/img.png" style="width: 300px; height: 250px"/>
-    <h3 style="font-family: Raleway;color: white;margin: 20px">Welcome to LanguageCards!</h3>
-    <input value="LOGIN" class="loginbtn" type="button"
+    <h3 id="welcome">Welcome to LanguageCards!</h3>
+    <input value="LOGIN" class="loginbtn" type="button" id="open"
     style="">
+
 </div>
+
+<script src="~/js/home.js"></script>
