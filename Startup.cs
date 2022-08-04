@@ -1,3 +1,4 @@
+using LanguageCards.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,11 @@ namespace LanguageCards
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+
+			services.AddAuthentication(
+			options => options.DefaultScheme = "Custom")
+			.AddScheme<CustomAuthSchemeOptions, CustomAuthHandler>(
+				"Custom", options => { });
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -41,6 +47,7 @@ namespace LanguageCards
 
 			app.UseRouting();
 
+			app.UseCookiePolicy();
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
