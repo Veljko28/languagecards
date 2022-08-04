@@ -1,27 +1,48 @@
-﻿using LanguageCards.Models;
+﻿using LanguageCards.Helpers;
+using LanguageCards.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LanguageCards.Controllers
 {
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-
 		public HomeController(ILogger<HomeController> logger)
 		{
 			_logger = logger;
 		}
 
+		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
 		}
+
+		[HttpPost]
+		public IActionResult Index(UserModel user)
+		{
+			if (user.Username == AdminModel.Username && user.Password == AdminModel.Password)
+			{
+				Response.Cookies.Append("LoggedIn", AdminModel.Password, new Microsoft.AspNetCore.Http.CookieOptions { 
+					Expires = DateTime.Now.AddHours(1),
+					IsEssential = true
+				});
+				return View();
+
+			}
+			return View();
+		}
+
 
 		public IActionResult Privacy()
 		{
