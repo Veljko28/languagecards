@@ -25,8 +25,25 @@ namespace LanguageCards.Controllers
 		[AllowAnonymous]
 		public IActionResult Index()
 		{
-			return View();
+			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
+			if (CheckAuth.Authenticate(cookie))
+			{
+				return View("Dashboard");
+			}
+			else return View();
 		}
+
+		[HttpGet]
+		public  IActionResult Dashboard()
+		{
+			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
+			if (CheckAuth.Authenticate(cookie))
+			{
+				return View();
+			}
+			else return RedirectToAction("Index","Home");
+		}
+
 
 		[HttpPost]
 		public IActionResult Index(UserModel user)
@@ -37,7 +54,7 @@ namespace LanguageCards.Controllers
 					Expires = DateTime.Now.AddHours(1),
 					IsEssential = true
 				});
-				return View();
+				return View("Dashboard");
 
 			}
 			return View();
