@@ -67,3 +67,36 @@
     padding: 10px;
     margin: 10px;
 }
+
+.img-container {
+    margin: 20px;
+}
+
+.langimg {
+    width: 150px;
+    height: 120px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+
+@keyframes opac {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.6;
+    }
+}
+
+.img-container:hover {
+    cursor: pointer;
+    animation: opac forwards 0.3s;
+}
+
+.subtext {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
