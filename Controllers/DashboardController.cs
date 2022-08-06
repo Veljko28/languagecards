@@ -9,11 +9,11 @@ namespace LanguageCards.Controllers
 {
 	public class DashboardController : Controller
 	{
-		[HttpGet("/")]
-		[Authorize(AuthenticationSchemes = "Custom")]
-		public IActionResult Dashboard()
-		{
-			return View();
-		}
+		//[HttpGet("/")]
+		//[Authorize(AuthenticationSchemes = "Custom")]
+		//public IActionResult Dashboard()
+		//{
+		//	return View();
+		//}
 	}
 }
