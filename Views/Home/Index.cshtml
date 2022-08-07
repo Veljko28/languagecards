@@ -2,25 +2,40 @@
     ViewData["Title"] = "Home";
 }
 
+@model ErrorMessageViewModel
+
 <link href="~/css/home.css" rel="stylesheet" />
 
 
-<div 
-     style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px"
-     >
+@*            data-ajax="true"
+              data-ajax-method="post"
+              data-ajax-loading="#loading"
+              data-ajax-mode="replace"
+              data-ajax-update="#updateDiv"*@
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
     <div class="modal-container" id="modal_container">
-        <form method="post" class="modal">
-                <h1 class="title">Login</h1>
-                <input type="text" class="lgninp" name="userName" value="" placeholder="Username" />
-                <input type="password" class="lgninp" name="Password" value="" placeholder="Password" />
-                <input value="SUBMIT" class="loginbtn" type="submit"/>
+        <form method="post"
+              class="modal">
+            <h1 class="title">Login</h1>
+            <input type="text" class="lgninp" name="userName" value="" placeholder="Username" />
+            <input type="password" class="lgninp" name="Password" value="" placeholder="Password" />
+            <button class="loginbtn" id="lgnbtn">
+                <span>SUBMIT</span>
+            </button>
         </form>
     </div>
-    <img src="~/img.png" style="width: 300px; height: 250px"/>
+    <img src="~/img.png" style="width: 300px; height: 250px" />
     <h3 id="welcome">Welcome to LanguageCards!</h3>
     <input value="LOGIN" class="loginbtn" type="button" id="open"
-    style="">
-
+           style="">
+    @if (Model != null && Model.Message != "") {
+        <div class="alert alert-danger" role="alert">
+            @Model.Message
+        </div>
+    }
 </div>
 
+
 <script src="~/js/home.js"></script>
+
