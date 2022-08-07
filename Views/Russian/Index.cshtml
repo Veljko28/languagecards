@@ -1,3 +1,50 @@
-﻿<div>
-    Russian
+﻿@{
+    ViewData["Title"] = "Руский язык";
+}
+
+<link href="~/css/russian.css" rel="stylesheet" />
+
+@*onClick="document.forms['forma'].submit();"*@
+
+<div>
+    <a class="back_container" href="~/">
+        <img src="~/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+        <span class="backtxt">Назад на выбор языка</span>
+    </a>
+    <h1 class="title">Руский язык</h1>
+    <h6 class="subtitle">До сих пор введено 12 слов, и практиковано 10 раз!</h6>
+    <form method="post" name="forma">
+        <div class="cards-container row">
+            <div class="display-card col-xs-12 col-sm-3">
+                <a href="/russian/search" class="nostyle">
+                    <div>
+                        <img src="~/search.svg" width="175" height="175" style="margin: 10px" />
+                    </div>
+                    <span class="card-title">Поиск</span>
+                    <div class="desc">Ищи добавлена слова здесь</div>
+                </a>
+            </div>
+
+            <div class="display-card col-xs-12 col-sm-3">
+                <div>
+                    <img src="~/add.svg" width="175" height="175" style="margin: 10px" />
+                </div>
+                <span class="card-title">Добавить</span>
+                <div class="desc">Здесь можно добавить новая слова</div>
+            </div>
+
+            <div class="display-card col-xs-12 col-sm-3">
+                <div>
+                    <img src="~/controller.svg" width="175" height="175" style="margin: 10px" />
+                </div>
+                <span class="card-title">Практиковать</span>
+                <div class="desc">Практикуй транслаций добавленых слова</div>
+            </div>
+        </div>
+        <div>
+            <div class="subtext" style="color:white; text-align: center">
+                Тысяч самых исползованих слов в русском языке: <a href="https://1000mostcommonwords.com/1000-most-common-russian-words/" target="_blank" style="color: #fcba03">Здесь</a>
+            </div>
+        </div>
+    </form>
 </div>
