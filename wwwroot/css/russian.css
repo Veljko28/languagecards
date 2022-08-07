@@ -1,0 +1,74 @@
+﻿.backbtn {
+    margin: 10px;
+}
+
+.backtxt {
+    color: #fcba03;
+    font-size: 15px;
+    margin-top: 10px
+}
+
+.title {
+    font-size: 50px;
+    margin: 10px;
+    color: white;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: white;
+    margin: 10px;
+}
+
+.display-card {
+    background-color: #fcba03;
+    margin: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 25px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.display-card:hover {
+    animation: opac 0.4s forwards;
+    cursor: pointer;
+}
+
+@keyframes opac {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.7;
+    }
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.back_container:hover {
+    cursor: pointer;
+    animation: opac 0.4s forwards;
+}
+
+
+.card-title {
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.desc {
+    color: #fff;
+    font-size: 18px;
+}
+
+.nostyle:hover {
+    text-decoration: none;
+}
