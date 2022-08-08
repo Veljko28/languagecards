@@ -72,3 +72,47 @@
 .nostyle:hover {
     text-decoration: none;
 }
+
+.word-input {
+    min-width: 450px;
+    width: 50vw;
+    background-color: #3b3b63;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.tbl {
+    color: white;
+    margin-top: 20px;
+    min-width: 450px;
+    width: 50vw;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.tbl thead td {
+    text-align: center;
+    font-weight: bold;
+}
+
+.tbl tr td{
+    padding: 20px;
+    background-color: #3b3b63;
+    border-radius: 10px;
+}
+
+.tbl tr td:last-child {
+    text-align: center;
+}
+
+.gear-icon {
+    font-size: 20px;
+    margin: 5px;
+}
+
+::placeholder {
+    color: white;
+}
