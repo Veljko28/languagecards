@@ -1,0 +1,44 @@
+﻿@{ 
+    ViewData["Title"] = "Поиск";
+} 
+
+
+<link href="~/css/russian.css" rel="stylesheet" />
+
+@model RussianListViewModel
+
+<div>
+    <form method="post">
+        <a class="back_container nostyle" href="~/russian">
+            <img src="~/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+            <span class="backtxt">Назад</span>
+        </a>
+        <h1 class="title">Поиск русских слова</h1>
+        <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите слово которое ищете..."/>
+        <table class="tbl">
+            <thead>
+                <tr>
+                    <td>Русский</td>
+                    <td>Английский</td>
+                    <td> </td>
+                </tr>
+            </thead>
+            @if (Model.WordList.Count() == 0)
+            {
+                <tr>
+                    <td>Нет слов здесь</td>
+                </tr>
+            }
+            else foreach (Tuple<string,string> pair in Model.WordList)
+            {
+            <tr>
+                <td>@pair.Item1</td>
+                <td>@pair.Item2</td>
+                <td class="back_container" onclick="window.location='/russian/edit';">
+                        <img src="~/gear-fill.svg" class="gear-icon"/><span>Edit</span>
+                </td>
+            </tr>
+            }
+        </table>
+    </form>
+</div>

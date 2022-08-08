@@ -7,7 +7,7 @@
 @*onClick="document.forms['forma'].submit();"*@
 
 <div>
-    <a class="back_container" href="~/">
+    <a class="back_container nostyle" asp-action="index" asp-controller="home">
         <img src="~/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
         <span class="backtxt">Назад на выбор языка</span>
     </a>
@@ -16,7 +16,7 @@
     <form method="post" name="forma">
         <div class="cards-container row">
             <div class="display-card col-xs-12 col-sm-3">
-                <a href="/russian/search" class="nostyle">
+                <a asp-action="search" asp-controller="russian" class="nostyle">
                     <div>
                         <img src="~/search.svg" width="175" height="175" style="margin: 10px" />
                     </div>
@@ -30,7 +30,7 @@
                     <img src="~/add.svg" width="175" height="175" style="margin: 10px" />
                 </div>
                 <span class="card-title">Добавить</span>
-                <div class="desc">Здесь можно добавить новая слова</div>
+                <div class="desc">Здесь можно добавить новые слова</div>
             </div>
 
             <div class="display-card col-xs-12 col-sm-3">
@@ -38,7 +38,7 @@
                     <img src="~/controller.svg" width="175" height="175" style="margin: 10px" />
                 </div>
                 <span class="card-title">Практиковать</span>
-                <div class="desc">Практикуй транслаций добавленых слова</div>
+                <div class="desc">Практикуй транслаций добавленых слов</div>
             </div>
         </div>
         <div>
