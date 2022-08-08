@@ -27,10 +27,12 @@ for details on configuring this project to bundle and minify static web assets. 
 
  .loginbtn:hover {
     animation: anim forwards 400ms;
+    outline: none;
 }
 
 .loginbtn:focus {
     animation: anim forwards 400ms;
+    outline: none;
 }
 
 #footer {

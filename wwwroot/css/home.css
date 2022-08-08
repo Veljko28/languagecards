@@ -13,12 +13,17 @@
     transition: opacity 0.3s ease;
 }
 
-#open {
-    transition: display 0.2s ease;
+*.hide {
+   display: none;
 }
 
-#open.hide {
-    display: none;
+*.show {
+    display: block;
+}
+
+
+.alert {
+    transition: display 0.2s ease;
 }
 
 #welcome {
