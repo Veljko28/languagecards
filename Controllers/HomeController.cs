@@ -30,10 +30,10 @@ namespace LanguageCards.Controllers
 			{
 				return View("Dashboard");
 			}
-			else return View();
+			else return View("Index");
 		}
 
-		[HttpGet]
+		[HttpGet("/dashboard")]
 		public  IActionResult Dashboard()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
@@ -57,7 +57,8 @@ namespace LanguageCards.Controllers
 				return View("Dashboard");
 
 			}
-			return View();
+
+			return View(new ErrorMessageViewModel("Failed to login. Try Again!"));
 		}
 
 
