@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Добавить";
+}
+
+
+<link href="~/css/russian.css" rel="stylesheet" />
+
+<div>
+    <form method="post">
+        <a class="back_container nostyle" href="~/russian">
+            <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+            <span class="backtxt">Назад</span>
+        </a>
+        <h1 class="title" style="margin: 10px 20px;">Добавить новые слова</h1>
+        <div class="add-container">
+            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите слово по-русский здесь" />
+            <img src="~/svgs/arrow-down.svg" width="50" height="50" style="margin: 20px;" />
+            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите слово по-ангилийский здесь" />
+            <input id="word" type="button" class="word-submit" value="Добавить" />
+        </div>
+    </form>
+
+
+
+</div>
+
+<script src="~/js/edit.js"></script>

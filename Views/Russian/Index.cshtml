@@ -8,7 +8,7 @@
 
 <div>
     <a class="back_container nostyle" asp-action="index" asp-controller="home">
-        <img src="~/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+        <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
         <span class="backtxt">Назад на выбор языка</span>
     </a>
     <h1 class="title">Руский язык</h1>
@@ -18,7 +18,7 @@
             <div class="display-card col-xs-12 col-sm-3">
                 <a asp-action="search" asp-controller="russian" class="nostyle">
                     <div>
-                        <img src="~/search.svg" width="175" height="175" style="margin: 10px" />
+                        <img src="~/svgs/search.svg" width="175" height="175" style="margin: 10px" />
                     </div>
                     <span class="card-title">Поиск</span>
                     <div class="desc">Ищи добавлена слова здесь</div>
@@ -26,16 +26,19 @@
             </div>
 
             <div class="display-card col-xs-12 col-sm-3">
-                <div>
-                    <img src="~/add.svg" width="175" height="175" style="margin: 10px" />
-                </div>
-                <span class="card-title">Добавить</span>
-                <div class="desc">Здесь можно добавить новые слова</div>
+                <a asp-action="add" asp-controller="russian" class="nostyle">
+
+                    <div>
+                        <img src="~/svgs/add.svg" width="175" height="175" style="margin: 10px" />
+                    </div>
+                    <span class="card-title">Добавить</span>
+                    <div class="desc">Здесь можно добавить новые слова</div>
+                </a>
             </div>
 
             <div class="display-card col-xs-12 col-sm-3">
                 <div>
-                    <img src="~/controller.svg" width="175" height="175" style="margin: 10px" />
+                    <img src="~/svgs/controller.svg" width="175" height="175" style="margin: 10px" />
                 </div>
                 <span class="card-title">Практиковать</span>
                 <div class="desc">Практикуй транслаций добавленых слов</div>
