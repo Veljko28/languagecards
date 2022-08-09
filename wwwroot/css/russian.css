@@ -114,5 +114,97 @@
 }
 
 ::placeholder {
+    color: #999;
+}
+
+.modal-container {
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: opacity 0.3s ease;
+    z-index: 4;
+}
+
+
+.modal-container.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 50px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 100%;
+}
+
+.modal-card {
+    background-color: #13131f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 50px;
+    border-radius: 5px;
+    position: relative;
+    min-width: 350px;
+}
+
+.edit-input {
+    min-width: 250px;
+    width: 20vw;
+    background-color: #3b3b63;
     color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#exit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#exit:hover {
+    cursor: pointer;
+}
+
+.add-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.word-submit {
+    min-width: 450px;
+    width: 50vw;
+    background-color: #fcba03;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+
+.word-submit:hover {
+    cursor: pointer;
+    animation: opac forwards 0.5s;
 }
