@@ -1,3 +1,52 @@
-﻿<div>
-    Spanish
+﻿@{
+    ViewData["Title"] = "Español";
+}
+
+<link href="~/css/russian.css" rel="stylesheet" />
+
+
+<div>
+    <a class="back_container nostyle" asp-action="index" asp-controller="home">
+        <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+        <span class="backtxt">Volver a la selección de idioma</span>
+    </a>
+    <h1 class="title">Español</h1>
+    <h6 class="subtitle">¡Hasta ahora, se han ingresado 12 palabras y se han practicado 10 veces!</h6>
+    <form method="post" name="forma">
+        <div class="cards-container row">
+            <div class="display-card col-xs-12 col-sm-3">
+                <a asp-action="search" asp-controller="spanish" class="nostyle">
+                    <div>
+                        <img src="~/svgs/search.svg" width="175" height="175" style="margin: 10px" />
+                    </div>
+                    <span class="card-title">Búsqueda</span>
+                    <div class="desc">Busque palabras añadidas aquí</div>
+                </a>
+            </div>
+
+            <div class="display-card col-xs-12 col-sm-3">
+                <a asp-action="add" asp-controller="spanish" class="nostyle">
+
+                    <div>
+                        <img src="~/svgs/add.svg" width="175" height="175" style="margin: 10px" />
+                    </div>
+                    <span class="card-title">Аñadidad</span>
+                    <div class="desc">Aquí puedes añadir nuevas palabras.</div>
+                </a>
+            </div>
+
+            <div class="display-card col-xs-12 col-sm-3">
+                <div>
+                    <img src="~/svgs/controller.svg" width="175" height="175" style="margin: 10px" />
+                </div>
+                <span class="card-title">Practicar</span>
+                <div class="desc">Practica traducir las palabras añadidas</div>
+            </div>
+        </div>
+        <div>
+            <div class="subtext" style="color:white; text-align: center">
+                Las Mil Palabras Más Usadas en Español: <a href="https://1000mostcommonwords.com/1000-most-common-spanish-words/" target="_blank" style="color: #fcba03">Aquí</a>
+            </div>
+        </div>
+    </form>
 </div>
