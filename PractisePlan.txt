@@ -1,0 +1,6 @@
+﻿This practise section will be realised in such way:
+1. Show word in chosen language and input field for english translation
+2. Show word in english and ask for given language translation
+3. Show image of given action/object... and ask for language word
+4. There will be 15 such questions/tests and you can make at most 3 errors (the third one is a fail).
+5. Make daily streaks a thing for practise
