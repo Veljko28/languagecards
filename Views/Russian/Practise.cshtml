@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Практиковать";
+}
+<link href="~/css/russian.css" rel="stylesheet" />
+
+<div style="display: flex; justify-content: space-between">
+    <a class="back_container nostyle" href="~/russian">
+            <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+            <span class="backtxt">Законичить</span>
+    </a>
+    <div style="margin-top: 5px">
+        <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #FF0000">3</span>
+    </div>
+
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
+    <div style="text-align: center">
+        <h2 class="subtitle">Перевести слово на английский</h2>
+        <h1 class="title" style="margin: 20px">Рюкзак</h1>
+        <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+    </div>
+</div>
