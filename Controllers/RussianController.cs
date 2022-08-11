@@ -71,5 +71,16 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
+        [HttpGet("russian/practise")]
+		public IActionResult Practise()
+        {
+			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
+			if (CheckAuth.Authenticate(cookie))
+			{
+				return View();
+			}
+			else return RedirectToAction("Index", "Home");
+		}
+
 	}
 }
