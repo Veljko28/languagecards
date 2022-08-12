@@ -4,12 +4,18 @@ for details on configuring this project to bundle and minify static web assets. 
     outline: none;
 }
 
+
+* {
+    font-family: revert;
+}
+
 .loginbtn {
-    font-family: Raleway;
+    font-family: revert;
     color: white;
     background-color: #fcba03;
     padding: 10px;
     border-radius: 10px;
+    border: none;
     width: 150px;
     font-size: medium;
     font-weight: bold;
