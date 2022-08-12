@@ -11,13 +11,32 @@
     <div style="margin-top: 5px">
         <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
         <span style="color: #FF0000">3</span>
+
+        <img src="~/svgs/bullseye.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #00FF00">14</span>
+
+        <img src="~/svgs/clock-fill.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #0cafe5">00:24</span>
     </div>
 
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
-    <div style="text-align: center">
+    @*Russian To English*@
+    @*<div style="text-align: center">
         <h2 class="subtitle">Перевести слово на английский</h2>
         <h1 class="title" style="margin: 20px">Рюкзак</h1>
         <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+    </div>*@
+
+    @*English to Russian*@
+    <div style="text-align: center">
+        <h2 class="subtitle">Перевести слово на русский</h2>
+        <h1 class="title" style="margin: 20px">Backpack</h1>
+        <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
     </div>
+
+
+    <button class="loginbtn" id="lgnbtn" type="submit">
+         <span>SUBMIT</span>
+    </button>
 </div>
