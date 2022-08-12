@@ -1,4 +1,9 @@
-﻿.backbtn {
+﻿* {
+    font-family: revert;
+}
+
+
+.backbtn {
     margin: 10px;
 }
 
@@ -9,12 +14,14 @@
 }
 
 .title {
+    font-family: revert;
     font-size: 50px;
     margin: 10px;
     color: white;
 }
 
 .subtitle {
+    font-family: revert;
     font-size: 20px;
     color: white;
     margin: 10px;
