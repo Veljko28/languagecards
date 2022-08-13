@@ -77,10 +77,21 @@ namespace LanguageCards.Controllers
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
 			if (CheckAuth.Authenticate(cookie))
 			{
-				return View();
+				return View(new PractiseGameViewModel());
 			}
 			else return RedirectToAction("Index", "Home");
 		}
+
+  //      [HttpPost("russian/practise")]
+		//public IActionResult Practise(PractiseGameViewModel model)
+  //      {
+		//	// logic for cheching answer
+
+		//	if (model.HearthsLeft == 0)
+  //          {
+
+  //          }
+  //      }
 
 	}
 }
