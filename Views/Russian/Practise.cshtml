@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Практиковать";
 }
+@model PractiseGameViewModel
 <link href="~/css/russian.css" rel="stylesheet" />
 
 <div style="display: flex; justify-content: space-between">
@@ -10,33 +11,53 @@
     </a>
     <div style="margin-top: 5px">
         <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #FF0000">3</span>
+        <span style="color: #FF0000">@Model.HearthsLeft</span>
 
         <img src="~/svgs/bullseye.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #00FF00">14</span>
+        <span style="color: #00FF00">@Model.CorrectAnswers</span>
 
         <img src="~/svgs/clock-fill.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #0cafe5">00:24</span>
+        <span style="color: #0cafe5" id="timer">00:00</span>
     </div>
 
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
-    @*Russian To English*@
-    @*<div style="text-align: center">
-        <h2 class="subtitle">Перевести слово на английский</h2>
-        <h1 class="title" style="margin: 20px">Рюкзак</h1>
-        <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
-    </div>*@
-
-    @*English to Russian*@
-    <div style="text-align: center">
-        <h2 class="subtitle">Перевести слово на русский</h2>
-        <h1 class="title" style="margin: 20px">Backpack</h1>
-        <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
-    </div>
+    <form method="post" name="answer">
 
 
-    <button class="loginbtn" id="lgnbtn" type="submit">
-         <span>SUBMIT</span>
-    </button>
+        @*Russian To English*@
+
+        @*<div style="text-align: center">
+            <h2 class="subtitle">Перевести слово на английский</h2>
+            <h1 class="title" style="margin: 20px">Рюкзак</h1>
+            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+        </div>*@
+
+        @*English to Russian*@
+
+        @*<div style="text-align: center">
+            <h2 class="subtitle">Перевести слово на русский</h2>
+            <h1 class="title" style="margin: 20px">Backpack</h1>
+            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+        </div>*@
+
+         @*Image to Russian*@
+        <div style="text-align: center">
+            <h2 class="subtitle">Введите слово по-русский</h2>
+            <div>
+                <img src="~/imgs/dog.png" width="250px" height="250px"/>
+            </div>
+            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите словo..." />
+        </div>
+
+        <div style="text-align: center">
+            <button class="loginbtn" id="lgnbtn" type="submit">
+                 <span>SUBMIT</span>
+            </button>
+        </div>
+    </form>
+
+    @*create correct answer alert and incorrect answer alert*@
 </div>
+
+<script src="~/js/timer.js"></script>
