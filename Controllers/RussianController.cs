@@ -82,16 +82,13 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
-  //      [HttpPost("russian/practise")]
-		//public IActionResult Practise(PractiseGameViewModel model)
-  //      {
-		//	// logic for cheching answer
+        [HttpPost("russian/practise")]
+        public IActionResult Practise(PractiseGameViewModel model)
+        {
+			// logic for cheching answer
+			model.AnswerType = "1";
+			return View(model);
+        }
 
-		//	if (model.HearthsLeft == 0)
-  //          {
-
-  //          }
-  //      }
-
-	}
+    }
 }
