@@ -61,5 +61,17 @@ namespace LanguageCards.Controllers
 				return View(new RussianListViewModel(search, viewModel.WordToFind));
 			}
 		}
+
+        [HttpGet("/spanish/practise")]
+		public IActionResult Practise()
+        {
+
+			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
+			if (CheckAuth.Authenticate(cookie))
+			{
+				return View();
+			}
+			else return RedirectToAction("Index", "Home");
+		}
 	}
 }
