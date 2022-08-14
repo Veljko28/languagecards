@@ -11,7 +11,7 @@
     </a>
     <div style="margin-top: 5px">
         <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #FF0000">@Model.HearthsLeft</span>
+        <span style="color: #FF0000" id="hearths">@Model.HearthsLeft</span>
 
         <img src="~/svgs/bullseye.svg" width="25" height="25" class="backbtn" />
         <span style="color: #00FF00">@Model.CorrectAnswers</span>
@@ -23,6 +23,14 @@
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
     <form method="post" name="answer">
+
+        <div class="alert-failed" id="fld">
+            THE ANSWER IS INCORRECT!
+        </div>
+
+        <div class="alert-success" id="sucs">
+            THE ANSWER IS CORRECT!
+        </div>
 
 
         @*Russian To English*@
@@ -51,13 +59,13 @@
         </div>
 
         <div style="text-align: center">
-            <button class="loginbtn" id="lgnbtn" type="submit">
+            <button class="loginbtn" id="sbm" type="submit">
                  <span>SUBMIT</span>
             </button>
         </div>
     </form>
 
-    @*create correct answer alert and incorrect answer alert*@
+    <input type="number" value=@Model.AnswerType hidden id="alert-type" />
 </div>
 
 <script src="~/js/timer.js"></script>
