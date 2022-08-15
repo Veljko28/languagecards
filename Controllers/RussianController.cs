@@ -87,6 +87,8 @@ namespace LanguageCards.Controllers
         {
 			// logic for cheching answer
 			model.AnswerType = "1";
+			Random rnd = new Random();
+			model.QuestionType = rnd.Next(4);
 			return View(model);
         }
 
