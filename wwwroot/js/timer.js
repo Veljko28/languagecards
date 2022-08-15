@@ -26,17 +26,21 @@
 var startInterval = setInterval(() => getTimePassed(), 1000);
 const sbm = document.getElementById("sbm");
 
-sbm.addEventListener("click", (e) => {
-    e.preventDefault();
+sbm.addEventListener("click", () => {
     const alr = document.getElementById("alert-type");
     const suc = document.getElementById("sucs"), fld = document.getElementById("fld");
+    console.log("testing")
     switch (alr.value) {
-        case 0:
+        case "0":
             break;
-        case 1:
+        case "1":
             suc.classList.add("show");
-        case 2:
+            fld.classList.remove("show")
+            break;
+        case "2":
             fld.classList.add("show");
+            suc.classList.remove("show")
+            break;
         default: break;
     }
 })
