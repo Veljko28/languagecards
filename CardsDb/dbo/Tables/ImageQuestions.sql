@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[ImageQuestions]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[ImagePath] NVARCHAR(100) NOT NULL,
+	[Translation] NVARCHAR(100) NOT NULL,
+	[Language] NVARCHAR(50) NOT NULL,
+)
