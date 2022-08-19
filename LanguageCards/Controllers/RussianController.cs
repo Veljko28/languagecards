@@ -71,6 +71,7 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
+
         [HttpGet("russian/practise")]
 		public IActionResult Practise()
         {
@@ -89,6 +90,7 @@ namespace LanguageCards.Controllers
 			model.AnswerType = "1";
 			Random rnd = new Random();
 			model.QuestionType = rnd.Next(4);
+			model.CorrectAnswers++;
 			return View(model);
         }
 
