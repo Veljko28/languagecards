@@ -69,7 +69,7 @@ namespace LanguageCards.Controllers
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
 			if (CheckAuth.Authenticate(cookie))
 			{
-				return View();
+				return View(new PractiseGameViewModel());
 			}
 			else return RedirectToAction("Index", "Home");
 		}
