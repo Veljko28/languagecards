@@ -2,7 +2,87 @@
     ViewData["Title"] = "Practicar";
 }
 
+<link href="~/css/russian.css" rel="stylesheet" />
+<script>
+function func() {
+    if (confirm('Are you sure you want to end this session?')) {
+        location.href = '/russian';
+    } else {
+        stop();
+    }
+}
+</script>
 
-<div>
-    Practise Page Spanish
+@model PractiseGameViewModel
+
+<div style="display: flex; justify-content: space-between">
+    <div class="back_container nostyle" onclick="func()" >
+            <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
+            <span class="backtxt">Законичить</span>
+    </div>
+    <div style="margin: 15px; display: flex; align-items: center">
+        <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #FF0000" id="hearths">@Model.HearthsLeft</span>
+
+        <img src="~/svgs/bullseye.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #00FF00">@Model.CorrectAnswers</span>
+
+        <img src="~/svgs/clock-fill.svg" width="25" height="25" class="backbtn" />
+        <span style="color: #0cafe5" id="timer">00:00</span>
+    </div>
+
 </div>
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
+    <form method="post" name="answer" onsubmit="(e) => e.preventDefault()">
+
+        <div class="alert-failed" id="fld">
+            THE ANSWER IS INCORRECT!
+        </div>
+
+        <div class="alert-success" id="sucs">
+            THE ANSWER IS CORRECT!
+        </div>
+
+        @if (Model.QuestionType == 1)
+        {
+            @*Spanish To English*@
+
+            <div style="text-align: center">
+                <h2 class="subtitle">Traducir al ingles</h2>
+                <h1 class="title" style="margin: 20px">Mochila</h1>
+                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Ingrese la palabra..." />
+            </div>
+        }
+        else if (Model.QuestionType == 2)
+        {
+            @*English to Spainish*@
+
+            <div style="text-align: center">
+                <h2 class="subtitle">Traducir al español</h2>
+                <h1 class="title" style="margin: 20px">Backpack</h1>
+                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Ingrese la palabra..." />
+            </div>
+        }
+        else
+        {
+             @*Image to Russian*@
+            <div style="text-align: center">
+                <h2 class="subtitle">Introduce una palabra en español</h2>
+                <div>
+                    <img src="~/imgs/dog.png" width="250px" height="250px"/>
+                </div>
+                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Ingrese la palabra..." />
+            </div>
+        }
+
+        <div style="text-align: center">
+            <button type="submit" class="loginbtn" id="sbm">
+                 <span>SUBMIT</span>
+            </button> 
+        </div>
+    </form>
+
+    <input type="number" value=@Model.AnswerType hidden id="alert-type" />
+</div>
+
+<script src="~/js/timer.js"></script>
