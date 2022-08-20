@@ -18,20 +18,26 @@ function func() {
             <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
             <span class="backtxt">Законичить</span>
     </div>
+
+    <input hidden name="HearthsLeft" value=@Model.HearthsLeft/>
+    <input hidden name="CorrectAnswers" value=@Model.CorrectAnswers/>
+    <input hidden name="TimePassed" value=@Model.TimePassed/>
+
+
     <div style="margin: 15px; display: flex; align-items: center">
         <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
         <span style="color: #FF0000" id="hearths">@Model.HearthsLeft</span>
 
         <img src="~/svgs/bullseye.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #00FF00">@Model.CorrectAnswers</span>
+        <span style="color: #00FF00" >@Model.CorrectAnswers</span>
 
         <img src="~/svgs/clock-fill.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #0cafe5" id="timer">00:00</span>
+        <span style="color: #0cafe5" id="timer">@Model.TimePassed</span>
     </div>
 
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
-    <form method="post" name="answer" onsubmit="(e) => e.preventDefault()">
+    <form method="post" action="practisepost" name="answer" onsubmit="(e) => e.preventDefault()">
 
         <div class="alert-failed" id="fld">
             THE ANSWER IS INCORRECT!

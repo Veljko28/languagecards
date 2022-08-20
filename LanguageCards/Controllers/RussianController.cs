@@ -73,25 +73,30 @@ namespace LanguageCards.Controllers
 
 
         [HttpGet("russian/practise")]
-		public IActionResult Practise()
+		public IActionResult Practise(PractiseGameViewModel model = null)
         {
+			if (model == null)
+            {
+				model = new PractiseGameViewModel();
+            }
+
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
 			if (CheckAuth.Authenticate(cookie))
 			{
-				return View(new PractiseGameViewModel());
+				return View(model);
 			}
 			else return RedirectToAction("Index", "Home");
 		}
 
-        [HttpPost("russian/practise")]
-        public IActionResult Practise(PractiseGameViewModel model)
+        [HttpPost("russian/practisepost")]
+        public IActionResult PractisePost(PractiseGameViewModel model)
         {
 			// logic for cheching answer
 			model.AnswerType = "1";
 			Random rnd = new Random();
 			model.QuestionType = rnd.Next(4);
 			model.CorrectAnswers++;
-			return View(model);
+			return RedirectToAction("Practise", "Russian", model);
         }
 
     }
