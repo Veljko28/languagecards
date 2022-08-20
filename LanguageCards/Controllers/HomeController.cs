@@ -51,7 +51,7 @@ namespace LanguageCards.Controllers
 			if (user.Username == AdminModel.Username && user.Password == AdminModel.Password)
 			{
 				Response.Cookies.Append("LoggedIn", AdminModel.Password, new Microsoft.AspNetCore.Http.CookieOptions { 
-					Expires = DateTime.Now.AddHours(1),
+					Expires = DateTime.Now.AddHours(2),
 					IsEssential = true
 				});
 				return View("Dashboard");
