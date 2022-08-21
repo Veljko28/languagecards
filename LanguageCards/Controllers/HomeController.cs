@@ -26,7 +26,7 @@ namespace LanguageCards.Controllers
 		public IActionResult Index()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View("Dashboard");
 			}
@@ -37,7 +37,7 @@ namespace LanguageCards.Controllers
 		public  IActionResult Dashboard()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View();
 			}

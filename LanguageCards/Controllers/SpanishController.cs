@@ -14,7 +14,7 @@ namespace LanguageCards.Controllers
 			public IActionResult Index()
 			{
 				var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-				if (CheckAuth.Authenticate(cookie))
+				if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 				{
 					return View();
 				}
@@ -26,7 +26,7 @@ namespace LanguageCards.Controllers
 		public IActionResult Add()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View();
 			}
@@ -40,7 +40,7 @@ namespace LanguageCards.Controllers
 			RussianListViewModel viewModel = new RussianListViewModel();
 
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View(viewModel);
 			}
@@ -67,7 +67,7 @@ namespace LanguageCards.Controllers
         {
 
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View(new PractiseGameViewModel());
 			}
