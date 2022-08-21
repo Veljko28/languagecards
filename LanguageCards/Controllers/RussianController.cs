@@ -14,7 +14,7 @@ namespace LanguageCards.Controllers
 		public IActionResult Index()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View();
 			}
@@ -27,7 +27,7 @@ namespace LanguageCards.Controllers
 			RussianListViewModel viewModel = new RussianListViewModel();
 			
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View(viewModel);
 			}
@@ -53,7 +53,7 @@ namespace LanguageCards.Controllers
 		public IActionResult Edit()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View();
 			}
@@ -64,7 +64,7 @@ namespace LanguageCards.Controllers
 		public IActionResult Add()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View();
 			}
@@ -75,13 +75,38 @@ namespace LanguageCards.Controllers
         [HttpGet("russian/practise")]
 		public IActionResult Practise(PractiseGameViewModel model = null)
         {
-			if (model == null)
-            {
-				model = new PractiseGameViewModel();
-            }
+			var practise = (Request.Cookies.Where(x => x.Key == "russianpractise")).FirstOrDefault();
+			if (practise.Value != null)
+			{
+				model.HearthsLeft = practise.Value[0] - 48;
+				if (practise.Value.Length == 10)
+				{
+					model.CorrectAnswers = int.Parse(practise.Value.Substring(2, 2));
+					model.TimePassed = practise.Value.Substring(5, 5);
+				}
+				else
+				{
+					model.CorrectAnswers = practise.Value[2] - 48;
+					model.TimePassed = practise.Value.Substring(4, 5);
+				}
+			}
+			else
+			{
+				Response.Cookies.Append("russianpractise", "3 0 00:00", new Microsoft.AspNetCore.Http.CookieOptions
+				{
+					Expires = DateTime.Now.AddMinutes(15),
+					IsEssential = true
+				});
+
+				Response.Cookies.Append("russianpractisestart", DateTime.Now.Ticks.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+				{
+					Expires = DateTime.Now.AddMinutes(15),
+					IsEssential = true
+				});
+			}
 
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie))
+			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
 			{
 				return View(model);
 			}
@@ -92,10 +117,33 @@ namespace LanguageCards.Controllers
         public IActionResult PractisePost(PractiseGameViewModel model)
         {
 			// logic for cheching answer
-			model.AnswerType = "1";
+			//model.AnswerType = "1";
+			bool correct = true; // temp variable for testing
+			var practise = (Request.Cookies.Where(x => x.Key == "russianpractise")).FirstOrDefault();
+			var start = (Request.Cookies.Where(x => x.Key == "russianpractisestart")).FirstOrDefault();
+			string cookieval = "";
+			if (correct)
+            {
+				cookieval += model.HearthsLeft.ToString() + " ";
+				cookieval += (model.CorrectAnswers+1).ToString() + " ";
+			}
+			else
+            {
+				cookieval += (model.HearthsLeft-1).ToString() + " ";
+				cookieval += model.CorrectAnswers.ToString() + " ";
+			}
+
+			long timepassed =  DateTime.Now.Ticks - long.Parse(start.Value);
+			double min = timepassed / TimeSpan.TicksPerMinute, sec = (timepassed % TimeSpan.TicksPerMinute) / TimeSpan.TicksPerSecond;
+			cookieval += Math.Ceiling(min).ToString() + ":" + Math.Ceiling(sec).ToString();
+
 			Random rnd = new Random();
 			model.QuestionType = rnd.Next(4);
-			model.CorrectAnswers++;
+			Response.Cookies.Append("russianpractise", cookieval, new Microsoft.AspNetCore.Http.CookieOptions
+			{
+				Expires = DateTime.Now.AddMinutes(15),
+				IsEssential = true
+			});
 			return RedirectToAction("Practise", "Russian", model);
         }
 
