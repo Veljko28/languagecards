@@ -9,9 +9,9 @@ namespace LanguageCards.Helpers
 {
 	public static class CheckAuth
 	{
-		public static bool Authenticate(KeyValuePair<string, string> cookie)
+		public static bool Authenticate(KeyValuePair<string, string> cookie, string value)
 		{
-			if (cookie.Value != null && cookie.Value == AdminModel.Password)
+			if (cookie.Value != null && cookie.Value == value)
 			{
 				return true;
 			}
