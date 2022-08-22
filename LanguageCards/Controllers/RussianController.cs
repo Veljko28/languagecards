@@ -98,7 +98,7 @@ namespace LanguageCards.Controllers
 					IsEssential = true
 				});
 
-				Response.Cookies.Append("russianpractisestart", DateTime.Now.Ticks.ToString(), new Microsoft.AspNetCore.Http.CookieOptions
+				Response.Cookies.Append("russianpractisestart", DateTimeOffset.Now.ToUnixTimeSeconds().ToString(), new Microsoft.AspNetCore.Http.CookieOptions
 				{
 					Expires = DateTime.Now.AddMinutes(15),
 					IsEssential = true
@@ -120,6 +120,18 @@ namespace LanguageCards.Controllers
 			//model.AnswerType = "1";
 			bool correct = true; // temp variable for testing
 			var practise = (Request.Cookies.Where(x => x.Key == "russianpractise")).FirstOrDefault();
+
+			if (practise.Value.Length == 10)
+			{
+				model.CorrectAnswers = int.Parse(practise.Value.Substring(2, 2));
+				model.TimePassed = practise.Value.Substring(5, 5);
+			}
+			else
+			{
+				model.CorrectAnswers = practise.Value[2] - 48;
+				model.TimePassed = practise.Value.Substring(4, 5);
+			}
+
 			var start = (Request.Cookies.Where(x => x.Key == "russianpractisestart")).FirstOrDefault();
 			string cookieval = "";
 			if (correct)
@@ -133,9 +145,10 @@ namespace LanguageCards.Controllers
 				cookieval += model.CorrectAnswers.ToString() + " ";
 			}
 
-			long timepassed =  DateTime.Now.Ticks - long.Parse(start.Value);
-			double min = timepassed / TimeSpan.TicksPerMinute, sec = (timepassed % TimeSpan.TicksPerMinute) / TimeSpan.TicksPerSecond;
-			cookieval += Math.Ceiling(min).ToString() + ":" + Math.Ceiling(sec).ToString();
+			long timepassed =  DateTimeOffset.Now.ToUnixTimeSeconds() - long.Parse(start.Value);
+			double min = timepassed / 60, sec = timepassed % 60;
+			string mn = Math.Ceiling(min).ToString(), sm = Math.Ceiling(sec).ToString();
+			cookieval += (mn.Length == 1 ? "0"+mn : mn) + ":" + (sm.Length == 1 ? "0" + sm : sm);
 
 			Random rnd = new Random();
 			model.QuestionType = rnd.Next(4);
