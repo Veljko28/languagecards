@@ -22,6 +22,11 @@
     timer.innerHTML = mt + ":" + st;
 }
 
+window.onbeforeunload = function (e) {
+    if (!confirm("Are you sure you want to end the practise right here?")) {
+        stop();
+    }
+}
 
 var startInterval = setInterval(() => getTimePassed(), 1000);
 const sbm = document.getElementById("sbm");
@@ -29,7 +34,6 @@ const sbm = document.getElementById("sbm");
 sbm.addEventListener("click", () => {
     const alr = document.getElementById("alert-type");
     const suc = document.getElementById("sucs"), fld = document.getElementById("fld");
-    console.log("testing")
     switch (alr.value) {
         case "0":
             break;
@@ -44,3 +48,5 @@ sbm.addEventListener("click", () => {
         default: break;
     }
 })
+
+
