@@ -18,7 +18,7 @@ function func() {
 <div style="display: flex; justify-content: space-between">
     <div class="back_container nostyle" onclick="func()" >
             <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
-            <span class="backtxt">Законичить</span>
+            <span class="backtxt">Salida</span>
     </div>
     <div style="margin: 15px; display: flex; align-items: center">
         <img src="~/svgs/heart-fill.svg" width="25" height="25" class="backbtn" />
@@ -28,12 +28,12 @@ function func() {
         <span style="color: #00FF00">@Model.CorrectAnswers</span>
 
         <img src="~/svgs/clock-fill.svg" width="25" height="25" class="backbtn" />
-        <span style="color: #0cafe5" id="timer">00:00</span>
+        <span style="color: #0cafe5" id="timer">@Model.TimePassed</span>
     </div>
 
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px">
-    <form method="post" name="answer" onsubmit="(e) => e.preventDefault()">
+    <form method="post" name="answer" action="practisepost">
 
         <div class="alert-failed" id="fld">
             THE ANSWER IS INCORRECT!
