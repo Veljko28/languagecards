@@ -157,7 +157,29 @@ namespace LanguageCards.Controllers
 				Expires = DateTime.Now.AddMinutes(15),
 				IsEssential = true
 			});
-			return RedirectToAction("Practise", "Russian", model);
+
+			if (model.CorrectAnswers == 14)
+            {
+				Response.Cookies.Append("rus", "true", new Microsoft.AspNetCore.Http.CookieOptions
+				{
+					Expires = DateTime.Now.AddSeconds(5),
+					IsEssential = true
+				});
+				return RedirectToAction("SuccessfulPractise", "Russian");
+            }
+			else return RedirectToAction("Practise", "Russian", model);
+        }
+
+
+        [HttpGet("russian/practise/success")]
+		public IActionResult SuccessfulPractise()
+        {
+            var cookie = (Request.Cookies.Where(x => x.Key == "rus")).FirstOrDefault();
+            if (CheckAuth.Authenticate(cookie, "true"))
+            {
+                return View();
+            }
+            else return RedirectToAction("Index", "Russian");
         }
 
     }
