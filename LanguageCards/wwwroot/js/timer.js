@@ -22,11 +22,15 @@
     timer.innerHTML = mt + ":" + st;
 }
 
-window.onbeforeunload = function (e) {
-    if (!confirm("Are you sure you want to end the practise right here?")) {
-        stop();
+window.onunload = function (e) {
+    var message = "Leaving the page now!",
+        e = e || window.event;
+    if (e) {
+        e.returnValue = message;
     }
-}
+
+    return message;
+};
 
 var startInterval = setInterval(() => getTimePassed(), 1000);
 const sbm = document.getElementById("sbm");
