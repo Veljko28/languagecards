@@ -5,12 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
+using LanguageCards.Models.DbModels;
 
 namespace LanguageCards.Controllers
 {
 	public class RussianController : Controller
 	{
-		[HttpGet("/russian")]
+		private readonly CardDbContext _context;
+
+        public RussianController(CardDbContext context)
+        {
+            _context = context;
+        }
+
+
+        [HttpGet("/russian")]
 		public IActionResult Index()
 		{
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
@@ -76,6 +87,11 @@ namespace LanguageCards.Controllers
 		public IActionResult Practise(PractiseGameViewModel model = null)
         {
 			var practise = (Request.Cookies.Where(x => x.Key == "russianpractise")).FirstOrDefault();
+
+			QuestionModel q = _context.Questions.FromSqlRaw("exec [dbo].[GetRandomQuestion] @LanguageType", new SqlParameter("LanguageType", "rus")).ToList().FirstOrDefault();
+			model.Word = q.Word;
+			model.Translation = q.Translation;
+
 			if (practise.Value != null)
 			{
 				model.HearthsLeft = practise.Value[0] - 48;
@@ -117,8 +133,14 @@ namespace LanguageCards.Controllers
         public IActionResult PractisePost(PractiseGameViewModel model)
         {
 			// logic for cheching answer
+			bool correct = false; 
+			if (model.Translation.ToLower() == model.Answer.ToLower())
+            {
+				correct = true;
+            }
+
+
 			//model.AnswerType = "1";
-			bool correct = true; // temp variable for testing
 			var practise = (Request.Cookies.Where(x => x.Key == "russianpractise")).FirstOrDefault();
 
 			if (practise.Value.Length == 10)
@@ -152,6 +174,14 @@ namespace LanguageCards.Controllers
 
 			Random rnd = new Random();
 			model.QuestionType = rnd.Next(4);
+			if (model.QuestionType < 3)
+            {
+				QuestionModel q = _context.Questions.FromSqlRaw("exec [dbo].[GetRandomQuestion] @LanguageType", new SqlParameter("LanguageType", "rus")).ToList().FirstOrDefault();
+				model.Word = q.Word;
+				model.Translation = q.Translation;
+			}
+
+
 			Response.Cookies.Append("russianpractise", cookieval, new Microsoft.AspNetCore.Http.CookieOptions
 			{
 				Expires = DateTime.Now.AddMinutes(15),
