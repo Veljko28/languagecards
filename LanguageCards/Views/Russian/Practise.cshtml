@@ -53,8 +53,8 @@ function func() {
 
             <div style="text-align: center">
                 <h2 class="subtitle">Перевести слово на английский</h2>
-                <h1 class="title" style="margin: 20px">Рюкзак</h1>
-                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+                <h1 class="title" style="margin: 20px">@Model.Word</h1>
+                <input id="word" type="text" class="word-input" name="Answer" placeholder="Введите перевод слова..." />
             </div>
         }
         else if (Model.QuestionType == 2)
@@ -63,8 +63,8 @@ function func() {
 
             <div style="text-align: center">
                 <h2 class="subtitle">Перевести слово на русский</h2>
-                <h1 class="title" style="margin: 20px">Backpack</h1>
-                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите перевод слова..." />
+                <h1 class="title" style="margin: 20px">@Model.Word</h1>
+                <input id="word" type="text" class="word-input" name="Answer" placeholder="Введите перевод слова..." />
             </div>
         }
         else
@@ -73,9 +73,10 @@ function func() {
             <div style="text-align: center">
                 <h2 class="subtitle">Введите слово по-русский</h2>
                 <div>
+                    @* @Model.ImagePath *@
                     <img src="~/imgs/dog.png" width="250px" height="250px"/>
                 </div>
-                <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите словo..." />
+                <input id="word" type="text" class="word-input" name="Answer" placeholder="Введите словo..." />
             </div>
         }
 
