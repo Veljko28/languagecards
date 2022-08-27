@@ -92,6 +92,13 @@ namespace LanguageCards.Controllers
 			model.Word = q.Word;
 			model.Translation = q.Translation;
 
+
+			Response.Cookies.Append("word", q.Word, new Microsoft.AspNetCore.Http.CookieOptions
+			{
+				Expires = DateTime.Now.AddMinutes(15),
+				IsEssential = true
+			});
+
 			if (practise.Value != null)
 			{
 				model.HearthsLeft = practise.Value[0] - 48;
@@ -130,11 +137,25 @@ namespace LanguageCards.Controllers
 		}
 
         [HttpPost("russian/practisepost")]
-        public IActionResult PractisePost(PractiseGameViewModel model)
+        public async Task<IActionResult>PractisePost(PractiseGameViewModel model)
         {
 			// logic for cheching answer
-			bool correct = false; 
-			if (model.Translation.ToLower() == model.Answer.ToLower())
+			bool correct = false;
+			var answer = (Request.Cookies.Where(x => x.Key == "word")).FirstOrDefault();
+
+			if (string.IsNullOrEmpty(answer.Value))
+            {
+				return RedirectToAction("Error", "Index");
+            }
+
+			QuestionModel word = await _context.Questions.FirstOrDefaultAsync(x => x.Word == answer.Value);
+
+			if (word == null)
+            {
+				return RedirectToAction("Error", "Index");
+			}
+
+			if (word.Translation.ToLower() == model.Answer.ToLower())
             {
 				correct = true;
             }
