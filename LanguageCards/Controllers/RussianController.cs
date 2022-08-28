@@ -82,6 +82,24 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
+        [HttpPost("russian/addpost")]
+		public async Task<IActionResult> AddPost(AddWordModel model)
+        {
+			try
+			{
+				await _context.Questions.AddAsync(new QuestionModel(model.Foreign, model.English, "rus"));
+
+				await _context.SaveChangesAsync();
+				return RedirectToAction("Add", "Russian");
+			}
+			catch (Exception ex)
+            {
+				Console.WriteLine(ex.Message);
+				return RedirectToAction("Error", "Home");
+            }
+
+        }
+
 
         [HttpGet("russian/practise")]
 		public IActionResult Practise(PractiseGameViewModel model = null)
@@ -145,20 +163,21 @@ namespace LanguageCards.Controllers
 
 			if (string.IsNullOrEmpty(answer.Value))
             {
-				return RedirectToAction("Error", "Index");
+				return RedirectToAction("Error", "Home");
             }
 
 			QuestionModel word = await _context.Questions.FirstOrDefaultAsync(x => x.Word == answer.Value);
 
 			if (word == null)
             {
-				return RedirectToAction("Error", "Index");
+				return RedirectToAction("Error", "Home");
 			}
 
 			if (word.Translation.ToLower() == model.Answer.ToLower())
-            {
+			{
 				correct = true;
-            }
+			}
+			else model.HearthsLeft--;
 
 
 			//model.AnswerType = "1";
