@@ -2,21 +2,22 @@
     ViewData["Title"] = "Добавить";
 }
 
+@model AddWordModel
 
 <link href="~/css/russian.css" rel="stylesheet" />
 
 <div>
-    <form method="post">
+    <form method="post" name="AddPost" action="addpost">
         <a class="back_container nostyle" href="~/russian">
             <img src="~/svgs/arrow-left-square-fill.svg" width="35" height="35" class="backbtn" />
             <span class="backtxt">Назад</span>
         </a>
         <h1 class="title" style="margin: 10px 20px; text-align: center">Добавить новые слова</h1>
         <div class="add-container">
-            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите слово по-русский здесь" />
+            <input id="foreign" type="text" class="word-input" name="foreign" placeholder="Введите слово по-русский здесь" />
             <img src="~/svgs/arrow-down.svg" width="50" height="50" style="margin: 20px;" />
-            <input id="word" type="text" class="word-input" name="WordToFind" placeholder="Введите слово по-ангилийский здесь" />
-            <input id="word" type="button" class="word-submit" value="Добавить" />
+            <input id="word" type="text" class="word-input" name="english" placeholder="Введите слово по-ангилийский здесь" />
+            <input id="sub" type="submit" class="word-submit" value="Добавить" />
         </div>
     </form>
 
