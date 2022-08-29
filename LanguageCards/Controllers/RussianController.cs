@@ -35,7 +35,14 @@ namespace LanguageCards.Controllers
 		[HttpGet("/russian/search")]
 		public IActionResult Search()
 		{
-			RussianListViewModel viewModel = new RussianListViewModel();
+			WordListViewModel viewModel = new WordListViewModel();
+
+			List<QuestionModel> words = _context.Questions.FromSqlRaw("exec [dbo].[GetAllWordsByLanguage] @LanguageType", new SqlParameter("@LanguageType", "rus")).ToList();
+
+			if (words.Any())
+            {
+				viewModel.Words = words;
+            }
 			
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
 			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
@@ -45,18 +52,40 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
+
+        [HttpPost("/russian/searchpost")]
+        public IActionResult SearchPost(WordListViewModel model)
+        {
+			List<QuestionModel> words = _context.Questions.FromSqlRaw("exec [dbo].[GetAllWordsByLanguage] @LanguageType", new SqlParameter("@LanguageType", "rus")).ToList();
+
+
+			try
+            {
+				var rowsModified = _context.Questions.FromSqlRaw("exec [dbo].[EditWord] @EditId, @EditWord, @EditTranslation",
+					new SqlParameter("EditId", words[int.Parse(model.EditId)]),
+					new SqlParameter("EditWord", model.EditWord),
+					new SqlParameter("EditTranslation", model.EditTranslation));
+            }
+			catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+			return RedirectToAction("Search", "Russian");
+		}
+
 		[HttpPost]
-		public IActionResult Search(RussianListViewModel viewModel)
+		public IActionResult Search(WordListViewModel viewModel)
 		{
 			if (String.IsNullOrEmpty(viewModel.WordToFind))
 			{
-				viewModel.WordList = RussianListViewModel.TempList;
+				viewModel.WordList = WordListViewModel.TempList;
 				return View(viewModel);
 			}
 			else
 			{
 				var search = viewModel.WordList.Where(x =>  x.Item1.ToLower().Contains(viewModel.WordToFind.ToLower()) || x.Item2.ToLower().Contains(viewModel.WordToFind.ToLower()));
-				return View(new RussianListViewModel(search, viewModel.WordToFind));
+				return View(new WordListViewModel(search, viewModel.WordToFind));
 			}
 		}
 
