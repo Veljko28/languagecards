@@ -1,19 +1,25 @@
-﻿using System;
+﻿using LanguageCards.Models.DbModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace LanguageCards.Models
 {
-	public class RussianListViewModel
+	public class WordListViewModel
 	{
-		public RussianListViewModel(IEnumerable<Tuple<string,string>> search, string word)
+        public List<QuestionModel> Words { get; set; }
+        public string EditWord { get; set; }
+        public string EditTranslation { get; set; }
+        public string EditId { get; set; }
+
+        public WordListViewModel(IEnumerable<Tuple<string,string>> search, string word)
 		{
 			WordList = search.ToList();
 			WordToFind = word;
 		}
 
-		public RussianListViewModel()
+		public WordListViewModel()
 		{
 
 		}
