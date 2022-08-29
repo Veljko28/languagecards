@@ -5,13 +5,13 @@
     const hearths = document.getElementById("hearths");
     if (hearths.innerHTML == "0") {
         alert("You lost all your hearths!");
-        location.href = "/russian";
+        location.href = "/" + location.pathname.split("/")[1];
         clearInterval(startInterval);
     }
     if (s == 59) {
         if (m == 14) {
             alert("This lesson took too long. It will be finished !");
-            location.href = "/russian";
+            location.href = "/" + location.pathname.split("/")[1];
             clearInterval(startInterval);
         }
         else m++,s = 0;
