@@ -1,11 +1,12 @@
-﻿@{
+﻿@using LanguageCards.Models.DbModels
+@{
     ViewData["Title"] = "Поиск";
 }
 
 
 <link href="~/css/russian.css" rel="stylesheet" />
 
-@model RussianListViewModel
+@model WordListViewModel
 
 <div class="page-container">
     <form method="post">
@@ -19,13 +20,14 @@
 
 
     <div class="modal-container" id="modal_container">
-        <form method="post" name="edit"
+        <form method="post" name="edit" action="searchpost"
               class="modal">
             <div class="modal-card">
                 <img src="~/svgs/x.svg" width="35" height="35" id="exit"/>
                 <h1 class="title">Edit</h1>
-                <input type="text" class="edit-input" name="userName" value="" id="rus" placeholder="Russian" />
-                <input type="text" class="edit-input" name="Password" value="" id="eng" placeholder="English" />
+                <input type="hidden" class="edit-input-disabled" name="EditId" value="" id="editid"/>
+                <input type="text" class="edit-input" name="EditWord" value="" id="rus" placeholder="Russian" />
+                <input type="text" class="edit-input" name="EditTranslation" value="" id="eng" placeholder="English" />
                 <button class="loginbtn" id="lgnbtn">
                     <span>SUBMIT</span>
                 </button>
@@ -41,17 +43,17 @@
                 <td> </td>
             </tr>
         </thead>
-        @if (Model.WordList.Count() == 0)
+        @if (Model.Words.Count() == 0)
         {
             <tr>
                 <td>Нет слов здесь</td>
             </tr>
         }
-        else foreach (Tuple<string, string> pair in Model.WordList)
+        else foreach (QuestionModel pair in Model.Words)
             {
                 <tr>
-                    <td class="russian_word">@pair.Item1</td>
-                    <td class="english_word">@pair.Item2</td>
+                    <td class="russian_word">@pair.Word</td>
+                    <td class="english_word">@pair.Translation</td>
                     <td class="back_container open" style="display: flex; justify-content: center">
                             <img src="~/svgs/gear-fill.svg" class="gear-icon" /><span>Edit</span>
                     </td>
