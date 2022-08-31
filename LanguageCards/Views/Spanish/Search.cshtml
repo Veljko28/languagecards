@@ -1,11 +1,12 @@
-﻿@{
+﻿@using LanguageCards.Models.DbModels
+@{
     ViewData["Title"] = "Búsqueda";
 }
 
 
 <link href="~/css/russian.css" rel="stylesheet" />
 
-@model RussianListViewModel
+@model WordListViewModel
 
 <div class="page-container">
     <form method="post">
@@ -47,12 +48,12 @@
                 <td>No hay palabras</td>
             </tr>
         }
-        else foreach (Tuple<string, string> pair in Model.WordList)
+       else foreach (QuestionModel pair in Model.Words)
             {
                 <tr>
-                    <td class="russian_word">@pair.Item1</td>
-                    <td class="english_word">@pair.Item2</td>
-                    <td class="back_container open" style="display: flex; justify-content: center" >
+                    <td class="russian_word">@pair.Word</td>
+                    <td class="english_word">@pair.Translation</td>
+                    <td class="back_container open" style="display: flex; justify-content: center">
                             <img src="~/svgs/gear-fill.svg" class="gear-icon" /><span>Edit</span>
                     </td>
                 </tr>
