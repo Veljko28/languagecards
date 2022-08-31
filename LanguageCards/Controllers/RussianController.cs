@@ -89,17 +89,6 @@ namespace LanguageCards.Controllers
 			}
 		}
 
-		[HttpGet("/russian/edit")]
-		public IActionResult Edit()
-		{
-			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
-			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
-			{
-				return View();
-			}
-			else return RedirectToAction("Index", "Home");
-		}
-
 		[HttpGet("russian/add")]
 		public IActionResult Add()
 		{
