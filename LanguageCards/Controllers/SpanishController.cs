@@ -1,6 +1,9 @@
 ﻿using LanguageCards.Helpers;
 using LanguageCards.Models;
+using LanguageCards.Models.DbModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,13 @@ namespace LanguageCards.Controllers
 {
 	public class SpanishController : Controller
 	{
+        private readonly CardDbContext _context;
+
+			public SpanishController(CardDbContext context)
+			{
+				_context = context;
+			}
+
 			[HttpGet("/spanish")]
 			public IActionResult Index()
 			{
@@ -33,11 +43,36 @@ namespace LanguageCards.Controllers
 			else return RedirectToAction("Index", "Home");
 		}
 
+		[HttpPost("spanish/addpost")]
+		public async Task<IActionResult> AddPost(AddWordModel model)
+		{
+			try
+			{
+				await _context.Questions.AddAsync(new QuestionModel(model.Foreign, model.English, "spn"));
+
+				await _context.SaveChangesAsync();
+				return RedirectToAction("Add", "Spanish");
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				return RedirectToAction("Error", "Home");
+			}
+
+		}
+
 
 		[HttpGet("/spanish/search")]
 		public IActionResult Search()
 		{
-			RussianListViewModel viewModel = new RussianListViewModel();
+			WordListViewModel viewModel = new WordListViewModel();
+
+			List<QuestionModel> words = _context.Questions.FromSqlRaw("exec [dbo].[GetAllWordsByLanguage] @LanguageType", new SqlParameter("@LanguageType", "spn")).ToList();
+
+			if (words.Any())
+			{
+				viewModel.Words = words;
+			}
 
 			var cookie = (Request.Cookies.Where(x => x.Key == "LoggedIn")).FirstOrDefault();
 			if (CheckAuth.Authenticate(cookie, AdminModel.Password))
@@ -48,18 +83,23 @@ namespace LanguageCards.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Search(RussianListViewModel viewModel)
+		public IActionResult Search(WordListViewModel model)
 		{
-			if (String.IsNullOrEmpty(viewModel.WordToFind))
+			List<QuestionModel> words = _context.Questions.FromSqlRaw("exec [dbo].[GetAllWordsByLanguage] @LanguageType", new SqlParameter("@LanguageType", "spn")).ToList();
+
+			try
 			{
-				viewModel.WordList = RussianListViewModel.TempList;
-				return View(viewModel);
+				var rowsModified = _context.Questions.FromSqlRaw("exec [dbo].[EditWord] @EditId, @EditWord, @EditTranslation",
+					new SqlParameter("EditId", words[int.Parse(model.EditId)]),
+					new SqlParameter("EditWord", model.EditWord),
+					new SqlParameter("EditTranslation", model.EditTranslation));
 			}
-			else
+			catch (Exception ex)
 			{
-				var search = viewModel.WordList.Where(x => x.Item1.ToLower().Contains(viewModel.WordToFind.ToLower()) || x.Item2.ToLower().Contains(viewModel.WordToFind.ToLower()));
-				return View(new RussianListViewModel(search, viewModel.WordToFind));
+				Console.WriteLine(ex.Message);
 			}
+
+			return RedirectToAction("Search", "Spanish");
 		}
 
         [HttpGet("/spanish/practise")]
